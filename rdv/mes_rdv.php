@@ -1,6 +1,6 @@
 <?php
 require_once '../includes/db.php';
-session_start();
+
 if (!isset($_SESSION['user_id'])) { header('Location: ../login.php'); exit; }
 $success = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_SESSION['role'] === 'patient') {

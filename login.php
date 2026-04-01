@@ -1,9 +1,12 @@
 <?php
 require_once 'includes/db.php';
-session_start();
 
 if (isset($_SESSION['user_id'])) {
-    header('Location: dashboard/patient.php');
+    if ($_SESSION['role'] === 'medecin') {
+        header('Location: dashboard/medecin.php');
+    } else {
+        header('Location: dashboard/patient.php');
+    }
     exit;
 }
 
@@ -21,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['role'] = $user['role'];
         $_SESSION['nom'] = $user['nom'];
+        $_SESSION['prenom'] = $user['prenom'];
 
         if ($user['role'] === 'medecin') {
             header('Location: dashboard/medecin.php');
